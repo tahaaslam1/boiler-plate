@@ -52,21 +52,9 @@ module.exports = async function FastDI(options = {}) {
 
     const register = async (type, value) => {
         switch (type) {
-            case "db":
-                container.register(
-                    "db",
-                    awilix.asFunction(() => value).singleton()
-                );
-                break;
             case "cache":
                 container.register(
                     "cache",
-                    awilix.asFunction(() => value).singleton()
-                );
-                break;
-            case "queue":
-                container.register(
-                    "queue",
                     awilix.asFunction(() => value).singleton()
                 );
                 break;

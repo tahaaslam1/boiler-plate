@@ -4,8 +4,6 @@ module.exports = function BootstrapMediator(opts) {
         logger,
         utility,
         _,
-        queue,
-        mdRabbitMq,
         statusesConsumers,
     } = opts;
 
@@ -105,10 +103,7 @@ module.exports = function BootstrapMediator(opts) {
     }
 
     const initialize = async function initialize() {
-        await initRaptorAuth();
         await initSystemSettings();
-        await initSystemQueues();
-        await initQueueConsumers();
     };
 
     return {

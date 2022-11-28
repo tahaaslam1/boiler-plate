@@ -153,7 +153,10 @@ module.exports = async function FastServer(options) {
             await _server.listen(
                 config.get("server").port,
                 config.get("server").host
-            );
+            ),
+                () => {
+                    console.log("listening on port");
+                };
         } catch (_error) {
             console.error("Shutting Down Due To Fatal Exception >");
             console.error("Server Initialization Error >", _error);
