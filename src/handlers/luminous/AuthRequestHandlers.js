@@ -15,6 +15,7 @@ module.exports = function AuthRequestHandlers(opts) {
                 const response = await Axios.get(
                     `https://api.exchangerate.host/latest?base=${base}&places=4`
                 );
+                
                 console.log(response.data.rates);
 
                 await cache["primary"].hset(`${base}`, response.data.rates); // saving key and value in redis cache
