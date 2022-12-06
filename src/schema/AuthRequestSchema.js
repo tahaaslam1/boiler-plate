@@ -14,7 +14,25 @@ module.exports = function AuthRequestSchema(opts) {
         };
     };
 
+    const signup = () => {
+        return {
+            method: "POST",
+            url: "/signup",
+            handler: authRequestHandlers.signup,
+        };
+    };
+
+    const mocksignup = () => {
+        return {
+            method: "POST",
+            url: "/mockSignup",
+            handler: authRequestHandlers.mocksignup,
+        };
+    };
+
     return {
         reqtest,
+        signup,
+        mocksignup,
     };
 };
