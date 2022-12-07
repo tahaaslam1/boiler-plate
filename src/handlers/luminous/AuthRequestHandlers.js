@@ -1,3 +1,4 @@
+const https = require("https");
 module.exports = function AuthRequestHandlers(opts) {
     const { Axios, cache, _ } = opts;
 
@@ -34,19 +35,27 @@ module.exports = function AuthRequestHandlers(opts) {
         const { body } = request;
         try {
             const res = await Axios.post(
-                "http://192.168.3.150:3000/v1/mockSignup",
+                "https://localhost:44323/api/SignUp",
                 {
-                    first_name: body.first_name,
-                    last_name: body.last_name,
+                    firstName: body.firstName,
+                    lastName: body.lastName,
                     email: body.email,
                     password: body.password,
+                    phoneNumber: body.phoneNumber,
+                },
+                {
+                    httpsAgent: new https.Agent({
+                        rejectUnauthorized: false,
+                    }),
                 }
             );
 
-            if (res == "successful") {
-                response.send("front end pe jo b response chaye yahan lgado");
+            console.log(res.data);
+
+            if (res.data == "Success") {
+                response.send({ response: "signed up" });
             } else {
-                response.send("failed to register person");
+                response.send({response : "failed to register person"});
             }
         } catch (e) {
             response.send("internal server error");
